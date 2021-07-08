@@ -1,0 +1,99 @@
+img2txt.py donnysweet.jpg --maxLen=420 --fontSize=4 > color.html
+
+
+
+
+
+
+一、单个HTML文件实现单击屏幕发出声音：
+新建一个.txt文件，复制以下代码
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单个网页播放音频</title>
+</head>
+<body>
+    <!--src里是音频的路径-->
+	<audio id="audio" src="https://www.w3school.com.cn/i/song.ogg"></audio>
+    <script>
+        //单个网页实现单击屏幕发出声音
+        function playSound(){
+            var audio=document.getElementById("audio");
+            if(audio.paused) {  //如果音频是暂停状态
+                audio.load;     //加载音频文件
+                audio.play();	//播放
+            }else {             //否则，也就是说音频是播放状态
+                audio.pause();  //就暂停
+            }
+        }
+        //调用
+        window.onclick=function () {
+            playSound();
+        }
+    </script>
+</body>
+</html>
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+把名字改为playsound.html（注意不是.txt了），然后双击打开
+
+如果需要改音乐，则鼠标右键–>打开方式–>记事本，修改src里音频的路径后保存即可。
+
+二、运行在服务器上也能点击屏幕播放音效：
+1.先建一个js文件，写上以下代码：
+
+var audio = document.createElement('audio');
+audio.setAttribute('src', 'https://www.w3school.com.cn/i/song.ogg');//这里是路径
+window.onclick=function () {
+        if(audio.paused) {  //如果音频是暂停状态
+            audio.load;     //那就播放
+            audio.play();  
+        }else {             //否则，也就是说音频是播放状态
+            audio.pause();   //就暂停
+        }
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>播放音频</title>
+</head>
+<body>
+    <!--引入js文件-->
+    <script>
+        var script = document.createElement('script');
+        script.type = 'media/javascript';
+        script.src = '/js/click_playsound.js';//src里是js文件的路径
+        $('body').append(script);
+    </script>
+</body>
+</html>
